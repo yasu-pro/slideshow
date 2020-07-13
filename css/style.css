@@ -4,10 +4,56 @@ body {
   width: 100%;
 }
 
-#pic {
+.pic {
+  width: 80%;
   margin: 0 auto;
+  text-align: center;
 }
 
-img .pic {
+#pic1 {
+  position: relative;
+  z-index: 500;
+}
+
+#pic2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 400;
   display: none;
+}
+
+#pic3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  display: none;
+}
+
+#pic4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  display: none;
+}
+
+.button {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.button #next {
+  display: inline-block;
+}
+
+.button #circle {
+  display: inline;
+  vertical-align: middle;
+}
+
+.button #back {
+  display: inline-block;
 }
