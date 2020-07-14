@@ -7,9 +7,10 @@ const pic4 = document.getElementById("pic4");
 const btnNext = document.getElementById("next");
 const btnBack = document.getElementById("back");
 
+//1枚目の配置
 const afterSlidePx = -640;
 
-const countTime = 100;
+const countTime = 1000 / 120; //1秒で50フレーム
 
 function slideScreen(b) {
   pic1.style.left = b + "px";
@@ -20,7 +21,7 @@ function setTimer() {
   const set = setInterval(() => {
     decrement();
 
-    if (result === afterSlidePx) {
+    if (result < afterSlidePx) {
       clearInterval(set);
     }
   }, countTime);
@@ -28,19 +29,20 @@ function setTimer() {
 
 let result = "";
 
-let i = 0;
+let i = 1;
 function decrement() {
   result = px - i;
 
   slideScreen(result);
-  i = i + 10;
+  i++;
 }
 
 let px = "";
-
 btnNext.addEventListener("click", () => {
-  px = pic1.style.left;
-
+  let style = window.getComputedStyle(pic1);
+  px = style.left;
   console.log(px);
   setTimer();
 });
+
+//2枚目の配置

@@ -5,41 +5,42 @@ body {
 }
 
 .pic {
+  /* position: relative; */
   width: 80%;
   margin: 0 auto;
   text-align: center;
 }
 
-#pic1 {
-  position: relative;
+.pic #pic1 {
+  /* position: relative; */
   z-index: 500;
+  margin: 0 2%;
 }
 
-#pic2 {
+.pic #pic2 {
   position: absolute;
-  top: 0;
-  left: 0;
   z-index: 400;
-  display: none;
+  margin: 0 2%;
 }
 
-#pic3 {
+.pic #pic3 {
   position: absolute;
-  top: 0;
-  left: 0;
+  /* top: 0;
+  left: 0; */
   z-index: 300;
-  display: none;
+  margin: 0 2%;
 }
 
-#pic4 {
+.pic #pic4 {
   position: absolute;
-  top: 0;
-  left: 0;
+  /* top: 0;
+  left: 0; */
   z-index: 200;
-  display: none;
+  margin: 0 2%;
 }
 
 .button {
+  position: relative;
   width: 80%;
   margin: 0 auto;
   text-align: center;
