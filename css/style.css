@@ -5,44 +5,33 @@ body {
 }
 
 .pic {
-  /* position: relative; */
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
+  height: 427px;
+  width: 100%;
+
+  position: relative;
+  /* text-align: center; */
+  overflow: hidden;
 }
 
 .pic #pic1 {
-  /* position: relative; */
-  z-index: 500;
-  margin: 0 2%;
+  position: absolute;
 }
 
 .pic #pic2 {
   position: absolute;
-  z-index: 400;
-  margin: 0 2%;
+  opacity: 0.6;
 }
 
 .pic #pic3 {
   position: absolute;
-  /* top: 0;
-  left: 0; */
-  z-index: 300;
-  margin: 0 2%;
 }
 
 .pic #pic4 {
   position: absolute;
-  /* top: 0;
-  left: 0; */
-  z-index: 200;
-  margin: 0 2%;
 }
 
 .button {
   position: relative;
-  width: 80%;
-  margin: 0 auto;
   text-align: center;
 }
 
