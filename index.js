@@ -7,7 +7,7 @@ const pic4 = document.getElementById("pic4");
 const btnNext = document.getElementById("next");
 const btnBack = document.getElementById("back");
 
-const picArray = [pic1, pic2, pic3, pic4];
+let picArray = [pic1, pic2, pic3, pic4];
 
 //画像の配置設定
 picArray[0].style.left = "-10%";
@@ -37,6 +37,7 @@ let l = 0;
 function decrement() {
   result = px - i;
   slideScreen(result);
+  console.log(result);
   i++;
 }
 
@@ -61,34 +62,45 @@ function decrement4() {
 //-------写真1枚目処理----------------------------------------------------
 function slideScreen(a) {
   picArray[0].style.left = a + "px";
-  // console.log(picArray[0].style.left);
 }
-//   if (result < ) {
-//     let spliceResult = picArray.splice(0, 1);
-//     picArray.push(spliceResult);
-//     console.log(picArray);
-//   }
-// }
 
 //-------写真2枚目処理----------------------------------------------------
 function slideScreen2(b) {
   picArray[1].style.left = b + "px";
-
-  if (result2 < px + afterSlide * 0.6) {
-  }
 }
 
 // -------写真3枚目処理----------------------------------------------------;
 function slideScreen3(c) {
   picArray[2].style.left = c + "px";
-  if (result2 < px + afterSlide * 0.6) {
-  }
 }
 
 // -------写真4枚目処理----------------------------------------------------;
 function slideScreen4(d) {
   picArray[3].style.left = d + "px";
-  if (result2 < px + afterSlide * 0.6) {
+  if (result < x - (x2 - px)) {
+    let spliceArray = picArray.splice(0, 1);
+    picArray.push(spliceArray[0]);
+    console.log(spliceArray, picArray);
+    //再び画像の配置設定
+    picArray[0].style.left = "-10%";
+    picArray[0].style.transform = "translate(10%)";
+    picArray[1].style.left = "50%";
+    picArray[1].style.transform = "translate(-50%)";
+    picArray[2].style.left = "110%";
+    picArray[2].style.transform = "translate(-110%)";
+    picArray[3].style.left = "170%";
+    picArray[3].style.transform = "translate(-170%)";
+
+    if (result < x - (x2 - px)) {
+      //result2 < px + afterSlide * 0.6
+      //↑↑は、+afterSlide*0.1で画像の右側が0になると止まる。
+      clearInterval(set);
+      btnNext.disabled = false;
+    }
+    i = 0;
+    j = 0;
+    k = 0;
+    l = 0;
   }
 }
 
@@ -103,6 +115,7 @@ let x3 = "";
 let px4 = "";
 let x4 = "";
 btnNext.addEventListener("click", (e) => {
+  btnNext.disabled = true;
   e.preventDefault();
   //要素の位置座標を取得
   let cilentRect = picArray[0].getBoundingClientRect();
@@ -132,9 +145,7 @@ btnNext.addEventListener("click", (e) => {
   setTimer();
 });
 
-// //-------写真2枚目処理----------------------------------------------------
-
-//setIntervalの設定
+//-------setInterval処理----------------------------------------------------
 let set;
 function setTimer() {
   set = setInterval(() => {
@@ -142,12 +153,5 @@ function setTimer() {
     decrement2();
     decrement3();
     decrement4();
-
-    //px+afterSlide*0.1でleft0
-    if (result < x - (x2 - px)) {
-      //result2 < px + afterSlide * 0.6
-      //↑↑は、+afterSlide*0.1で画像の右側が0になると止まる。
-      clearInterval(set);
-    }
   }, countTime);
 }
