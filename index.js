@@ -10,20 +10,24 @@ const circle = document.getElementById("circle");
 
 let picArray = [pic1, pic2, pic3, pic4];
 
+//写真の大きさ分の移動
+const afterSlide = 640;
+//画像の透明度
+const opacity = 0.4;
+//写真のスライドするスピード
+const countTime = 1000 / 300; //1秒で50フレームは 1000/50
+
 //画像の配置設定
 picArray[0].style.left = "-10%";
 picArray[0].style.transform = "translate(10%)";
+picArray[0].style.opacity = opacity;
 picArray[1].style.left = "50%";
 picArray[1].style.transform = "translate(-50%)";
 picArray[2].style.left = "110%";
 picArray[2].style.transform = "translate(-110%)";
+picArray[2].style.opacity = opacity;
 picArray[3].style.left = "170%";
 picArray[3].style.transform = "translate(-170%)";
-
-//写真の大きさ分の移動
-const afterSlide = 640;
-//写真のスライドするスピード
-const countTime = 1000 / 120; //1秒で50フレーム
 
 //-------減産処理----------------------------------------------------
 let result = "";
@@ -75,9 +79,6 @@ function increment2() {
 function increment3() {
   result3 = px3 + k;
   slideScreen3(result3);
-  console.log(result3);
-  console.log(x3 + afterSlide + (x3 + afterSlide - (x2 + afterSlide)));
-
   k++;
 }
 
@@ -90,38 +91,67 @@ function increment4() {
 //-------写真1枚目処理----------------------------------------------------
 function slideScreen(a) {
   picArray[0].style.left = a + "px";
+  let opacityCount = i - i / 4;
+  if (px4 < 0) {
+    picArray[0].style.opacity = opacity + Math.floor(opacityCount / 10) / 100;
+    console.log(Math.floor(opacityCount / 10) / 100);
+    console.log();
+  } else if (px4 > 0) {
+    picArray[0].style.opacity = opacity - Math.floor(opacityCount / 10) / 100;
+  }
 }
 
 //-------写真2枚目処理----------------------------------------------------
 function slideScreen2(b) {
   picArray[1].style.left = b + "px";
+  let opacityCount = i - i / 4;
+  if (px4 < 0) {
+    picArray[1].style.opacity = 1 - Math.floor(opacityCount / 10) / 100;
+  } else if (px4 > 0) {
+    picArray[1].style.opacity = 1 - Math.floor(opacityCount / 10) / 100;
+  }
 }
-
 // -------写真3枚目処理----------------------------------------------------;
 function slideScreen3(c) {
   picArray[2].style.left = c + "px";
+  let opacityCount = i - i / 4;
+  if (px4 < 0) {
+    picArray[2].style.opacity = opacity - Math.floor(i / 10) / 100;
+  } else if (px4 > 0) {
+    picArray[2].style.opacity = opacity + Math.floor(opacityCount / 10) / 100;
+  }
 }
 
 // -------写真4枚目処理----------------------------------------------------;
 function slideScreen4(d) {
   picArray[3].style.left = d + "px";
+  let opacityCount = i - i / 4;
+  if (px4 < 0) {
+    picArray[3].style.opacity = Math.floor(i / 10) / 100 - opacity;
+  } else if (px4 > 0) {
+    picArray[3].style.opacity = 1 - Math.floor(opacityCount / 10) / 100;
+  }
 
   if (result < x - (x2 - px)) {
     let spliceArray = picArray.splice(0, 1);
+
     picArray.push(spliceArray[0]);
     //再び画像の配置設定
     picArray[0].style.left = "-10%";
     picArray[0].style.transform = "translate(10%)";
+    picArray[0].style.opacity = opacity;
     picArray[1].style.left = "50%";
     picArray[1].style.transform = "translate(-50%)";
     picArray[2].style.left = "110%";
     picArray[2].style.transform = "translate(-110%)";
+    picArray[2].style.opacity = opacity;
     picArray[3].style.left = "170%";
     picArray[3].style.transform = "translate(-170%)";
 
     if (result < x + (x2 - px)) {
       clearInterval(set);
       btnNext.disabled = false;
+      btnBack.disabled = false;
     }
     i = 0;
     j = 0;
@@ -134,14 +164,15 @@ function slideScreen4(d) {
   ) {
     let spliceArray = picArray.splice(3, 1);
     picArray.splice(0, 0, spliceArray[0]);
-    console.log(spliceArray, picArray);
     //再び画像の配置設定
     picArray[0].style.left = "-10%";
     picArray[0].style.transform = "translate(10%)";
+    picArray[0].style.opacity = opacity;
     picArray[1].style.left = "50%";
     picArray[1].style.transform = "translate(-50%)";
     picArray[2].style.left = "110%";
     picArray[2].style.transform = "translate(-110%)";
+    picArray[2].style.opacity = opacity;
     picArray[3].style.left = "-70%";
     picArray[3].style.transform = "translate(70%)";
 
@@ -150,6 +181,7 @@ function slideScreen4(d) {
       x3 + afterSlide + (x3 + afterSlide - (x2 + afterSlide)) + afterSlide * 0.1
     ) {
       clearInterval(set2);
+      btnNext.disabled = false;
       btnBack.disabled = false;
     }
     i = 0;
@@ -170,7 +202,7 @@ let x3 = "";
 let px4 = "";
 let x4 = "";
 
-let count = 2;
+let count = 1;
 
 //-------btnNextイベント処理----------------------------------------------------
 
@@ -192,16 +224,11 @@ btnNext.addEventListener("click", (e) => {
     circle.textContent = "●○○○";
   }
 
-  picArray[0].style.left = "-10%";
-  picArray[0].style.transform = "translate(10%)";
-  picArray[1].style.left = "50%";
-  picArray[1].style.transform = "translate(-50%)";
-  picArray[2].style.left = "110%";
-  picArray[2].style.transform = "translate(-110%)";
   picArray[3].style.left = "170%";
   picArray[3].style.transform = "translate(-170%)";
 
   btnNext.disabled = true;
+  btnBack.disabled = true;
   e.preventDefault();
   //要素の位置座標を取得
   let cilentRect = picArray[0].getBoundingClientRect();
@@ -251,15 +278,10 @@ btnBack.addEventListener("click", (e) => {
     circle.textContent = "●○○○";
   }
 
-  picArray[0].style.left = "-10%";
-  picArray[0].style.transform = "translate(10%)";
-  picArray[1].style.left = "50%";
-  picArray[1].style.transform = "translate(-50%)";
-  picArray[2].style.left = "110%";
-  picArray[2].style.transform = "translate(-110%)";
   picArray[3].style.left = "-70%";
   picArray[3].style.transform = "translate(70%)";
 
+  btnNext.disabled = true;
   btnBack.disabled = true;
   e.preventDefault();
 
