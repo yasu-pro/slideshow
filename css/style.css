@@ -45,3 +45,7 @@ body {
 .button #back {
   display: inline-block;
 }
+
+#circle {
+  font-size: 10px;
+}
